@@ -14,7 +14,7 @@ Case3 :- Array also contains 0 : Then there will be not much difference...its ju
 
 
 
-```
+```java
 class Solution {
     public int maxProduct(int[] nums) {
         
