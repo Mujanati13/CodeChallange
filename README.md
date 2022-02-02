@@ -1,1 +1,1 @@
-## 30 Days Of Code Challange
+## 30 Days of Code Challange
