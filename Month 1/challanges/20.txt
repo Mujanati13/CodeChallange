@@ -1,0 +1,162 @@
+
+- Typescript
+
+function TwoSum(arr , targte) : array{
+	for(var i = 0 ; i<arr.length; i++){
+		for(var j = 0; j<arr.length; j++){
+			if(j == i)
+				continue
+			if(arr[i]+arr[j] == target)
+				return [i , j]
+		}
+	}
+}
+
+- Rust
+
+impl Solution {
+    pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
+        let mut resultV = vec![0,0];
+        for (pos, element) in nums.iter().enumerate(){
+            for (pos1, element1) in nums.iter().enumerate(){
+                if pos == pos1 {
+                    continue;
+                }else if element+ element1 == target {
+                    resultV[0]= pos as i32;
+                    resultV[1]= pos1 as i32;
+                }
+            }
+        }
+        return resultV;
+	}
+}
+
+R - 
+
+solution <- function(nums,target){
+  for (i in 1:length(nums)) {
+    for (j in 1:length(nums)) {
+      if(i!=j && nums[i]+nums[j]==target) return(c(i,j))
+    }
+  }
+}
+
+- Dart 
+
+class TwoSum {
+  TwoSum._();
+  static List<int>? twoSum(List<int> nums, int target) {
+    final correspondences = HashMap<int, int>();
+    for (int index = 0; index < nums.length; index++) {
+      final value = nums[index];
+      final missing = target - value;
+      if (correspondences.containsKey(missing)) {
+        return [correspondences[missing]!, index];
+      }
+      correspondences[value] = index;
+    }
+    return null;
+  }
+
+}
+
+- Delphi 
+
+function Twosum(arr : array, target:integet) : array;
+	var i:integer;
+	var j:integer;
+ begin
+   for i:=1 to Length(arr) do 
+   Begin 
+   	for i:=1 to Length(arr) do 
+   	Begin 
+   	if arr[i] + arr[j] == target then 
+   		-- return statment 
+   	end 
+   end 
+ end;
+
+ - Racket
+
+ (define/contract (two-sum nums target)
+  (-> (listof exact-integer?) exact-integer? (listof exact-integer?))
+    (define s (make-hash))
+    
+    (let/cc cc
+        (for ([n nums]
+              [i (range (length nums))])
+            (let ([diff (- target n)])
+                (if (hash-has-key? s diff)
+                    (cc `(,i ,(hash-ref s diff)))
+                    (hash-set! s n i))
+            )
+        )
+        (error "No solution found.")
+    )
+  )
+
+  - C
+
+int* twoSum(int* nums, int numsSize, int target, int* returnSize){
+int i,j,*res=NULL; *returnSize=2;
+
+    for (i=0; i<numsSize; i++) {
+        for(j=i+1;j<numsSize;j++) {
+            if ((nums[i]+nums[j]) == target) {
+               res = (int*)malloc((*returnSize)*(sizeof(int)));
+               
+                *res =i; /*Since each input would have exactly one pair, no additional checks are required. */
+                *(res+1) =j;
+            }
+        }
+    }
+
+return res;
+
+- C#	
+
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+        for(int i=0;i<nums.Length;i++)
+        {
+            for(int j=0;j!=i && j<nums.Length;j++)
+            {
+                if(nums[i]+nums[j]==target)
+                    return new int[] {i,j};
+            }
+        }
+        return new int[] {0};
+}
+
+- Python 3
+
+def twoSum(self, nums: List[int], target: int) -> List[int]:
+dict={}
+for idx,val in enumerate(nums):
+    if target-val in dict:
+        return [dict.get(target-val),idx]
+     else:
+		dict[val]=idx
+
+-- Objective C
+
+twoSumWithDictionary:(NSArray*) array forTarget:(NSInteger) target {
+    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:2];
+    NSMutableDictionary *map = [[NSMutableDictionary alloc] init];
+    NSInteger len = [array count];
+    for (int i = 0; i < len; i++) {
+        [map setObject:[NSNumber numberWithInt:i] forKey:[array objectAtIndex:i]];
+    }
+    [map enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop){
+        if ([key integerValue] < target) {
+            NSInteger restSum = target - [key integerValue];
+            id obj = [map objectForKey:[NSNumber numberWithInteger:restSum]];
+            if(obj && obj != object) {
+                result[0] = [object integerValue] < [obj integerValue] ? object : obj;
+                result[1] = [object integerValue] < [obj integerValue] ? obj : object;
+                *stop = YES;
+            }
+        }
+    }];
+    return [result copy];
+}
